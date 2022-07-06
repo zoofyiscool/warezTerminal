@@ -1,6 +1,8 @@
 # warezTerminal
 A C++ project I'm working on
 
+I will release pre-compiled binaries soon.
+
 To compile from source follow instructions below
 ```
 $ git clone https://github.com/zoofyiscool/warezTerminal.git
