@@ -46,7 +46,7 @@ int main() {
 }
 
 void startUp() {
-    std::cout << appName << " 0.1" << std::endl;
+    std::cout << appName << " 0.1.0-alpha" << std::endl;
 	//time_t now = time(0);
 	//char* dt = ctime(&now);
 	std::cout << userName << " logged in at: " << dt << std::endl;
