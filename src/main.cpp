@@ -38,7 +38,6 @@ int main() {
 		nonUserShell();
 	}
 	else if (isStarted == true) {
-		testFunc();
 		shellOutput();
 		std::getline(std::cin, response);
 		prinRes();
@@ -108,8 +107,9 @@ void prinRes() {
 		}
 	}
 	else if (response == "license") {
-		std::cout << "This program is free software: you can redistribute it and/or" << std::endl;
-		std::cout << "modify it under the terms of the GNU General Public License 3 as published by the Free Software Foundation." << std::endl;
+		std::cout << "This program comes with ABSOLUTELY NO WARRANTY" << std::endl;
+		std::cout << "This is free software, and you are welcome to redistribute it under certain conditions.\n" << 
+		"For more information see the GNU General Public License 3 (or later)" << std::endl;
 		main();
 	}
 	else {
