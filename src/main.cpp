@@ -192,7 +192,7 @@ void removeAll() {
 	if (configPassFileR) {
 		std::remove(cfgPassDel);
 	}
-	else if (configUsrFileR) {
+	if (configUsrFileR) {
 		std::remove(cfgUsrDel);
 	}
 	std::cout << "Wiping.." << std::endl;
