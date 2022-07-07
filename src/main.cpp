@@ -14,11 +14,16 @@ std::string envUsr = getenv("USER");
 std::string homeDir = "/home/";
 std::string configUsr = homeDir + envUsr + "/.config/warezUsername.txt";
 std::string response;
+std::string nobodyDir = homeDir + envUsr + "/.config/warezHELPMEPLEASE";
 std::string appName = "warezTerm";
 std::string shellName = "theShell";
 std::string userName = "nobody";
 std::string password;
 bool isStarted = false;
+//bool isNobody = false;
+bool isNotNobody = true;
+bool wasNobody = false; /* incase they try again.. */
+bool nobodyAllowed = false; /* alright... */
 time_t now = time(0);
 char* dt = ctime(&now);
 
@@ -48,14 +53,51 @@ int main() {
 }
 
 void startUp() {
-    std::cout << appName << " 0.1.0-alpha" << std::endl;
-	passFailSafe();
-	checkPass();
-	std::cout << userName << " logged in at: " << dt << std::endl;
-    std::cout << "Try typing 'help'!\n" << std::endl;
-	shellOutput();
-	std::getline(std::cin, response);
-	prinRes();
+	std::ifstream nobodyForever(nobodyDir);
+	if (nobodyForever) {
+		std::cout << "why though" << std::endl;
+//		isNobody = true;
+		passFailSafe();
+		checkPass();
+	   	main();	
+	}
+	else {
+		if (userName == "nobody") { /* thought this would be funny lol */
+			if (wasNobody == true) {
+				std::cout << "no fucking way u done it again lol.." << std::endl;
+				std::cout << "mAyBe TrY aGaIn?!" << std::endl;
+				nobodyAllowed = true;
+				wasNobody = false;
+				nonUserShell();
+			}
+			if (nobodyAllowed == true) {
+				std::cout << "fine, youve beaten me.. you can have it." << std::endl;
+				std::cout << "you will have this forever." << std::endl;
+				std::ofstream nobodyForever(nobodyDir);
+				nobodyForever << "why would you do this, i thought i was nobody, not you!!";
+				nobodyForever.close();
+				nobodyAllowed = false;
+			}
+			if (isNotNobody == true) {
+				wasNobody = true;
+				std::cout << "Why?.. No lol.. Go back and fix it. :) " << std::endl;
+				std::cout << "ur getting dropped into the non-user shell again.." << std::endl;
+				std::cout << "type 'setup'" << std::endl;
+			   	isNotNobody = false;	
+				nonUserShell();
+			}
+		}
+	}
+	if (!nobodyForever) {
+    	std::cout << appName << " 0.1.0-alpha" << std::endl;
+		passFailSafe();
+		checkPass();
+		std::cout << userName << " logged in at: " << dt << std::endl;
+    	std::cout << "Try typing 'help'!\n" << std::endl;
+		shellOutput();
+		std::getline(std::cin, response);
+		prinRes();
+	}
 }
 
 void prinRes() {
@@ -114,6 +156,19 @@ void prinRes() {
 		"For more information see the GNU General Public License 3 (or later)" << std::endl;
 		main();
 	}
+	else if (response == "whoami") {
+		if (userName == "nobody") {
+			std::cout << "You will never be nobody, you made a mistake typing this command :))" << std::endl;
+			userName = "NEVER";
+			std::cout << "ur fucked loll.." << std::endl;
+			removeAll();
+			main();
+		}
+		else {
+			std::cout << userName << std::endl;
+			main();
+		}
+	}
 	else {
         std::cout << shellName << ": command not found: " << response << std::endl;
         main();
@@ -170,14 +225,20 @@ void shellOutput() {
 void removeAll() {
 	const char* cfgPassDel = passFile.c_str();
 	const char* cfgUsrDel = configUsr.c_str();
+	const char* nobodyForeverDel = nobodyDir.c_str();
 	std::ifstream configPassFileR(passFile);
 	std::ifstream configUsrFileR(configUsr);
+	std::ifstream nobodyForever(nobodyDir);
 	if (configPassFileR) {
 		std::remove(cfgPassDel);
 	}
 	if (configUsrFileR) {
 		std::remove(cfgUsrDel);
 	}
+	if (nobodyForever) {
+		std::remove(nobodyForeverDel);
+	}
+
 }
 
 void readUserName() {

@@ -24,6 +24,8 @@ To compile from source follow instructions below
 ```
 $ git clone https://github.com/zoofyiscool/warezTerminal.git
 
+$ cd warezTerminal
+
 $ make
 ```
 Binary should be in the build folder, if you want to install globally type below as **root**
