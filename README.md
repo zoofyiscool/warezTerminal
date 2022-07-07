@@ -1,7 +1,7 @@
 # warezTerminal
 A C++ project I'm working on
 
-How to install pre-compiled binary
+Pre-compiled binary
 
 ```
 $ wget https://github.com/zoofyiscool/warezTerminal/releases/download/v0.1.0-alpha/warezTerminal
@@ -17,7 +17,7 @@ $ ./warezTerminal
 
 optional: install globally (run this command as root)
 ```
-cp warezTerminal /usr/bin
+mv warezTerminal /usr/bin
 ```
 
 To compile from source follow instructions below

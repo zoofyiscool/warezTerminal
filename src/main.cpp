@@ -1,4 +1,4 @@
-// TODO: PASSWORD SYSTEM WITH ENCRYPTION
+// TODO: COLOURS
 // TODO: MORE COMMANDS
 
 #include "functions.h"
@@ -8,15 +8,16 @@
 #include <ctime>
 #include <fstream>
 #include <unistd.h>
+#include <unordered_set>
 
 std::string envUsr = getenv("USER");
 std::string homeDir = "/home/";
-std::string fileDir = "/.config/warezUsername.txt";
-std::string configUsr = homeDir + envUsr + fileDir;
+std::string configUsr = homeDir + envUsr + "/.config/warezUsername.txt";
 std::string response;
 std::string appName = "warezTerm";
 std::string shellName = "theShell";
 std::string userName = "nobody";
+std::string password;
 bool isStarted = false;
 time_t now = time(0);
 char* dt = ctime(&now);
@@ -24,6 +25,7 @@ char* dt = ctime(&now);
 void readUserName();
 void clrScr();
 void helpMsg();
+void removeAll();
 void shellOutput();
 void prinRes();
 void startUp();
@@ -47,8 +49,26 @@ int main() {
 
 void startUp() {
     std::cout << appName << " 0.1.0-alpha" << std::endl;
-	//time_t now = time(0);
-	//char* dt = ctime(&now);
+	passFailSafe();
+	std::cout << "Enter your password: ";
+	std::getline(std::cin, password);
+	std::ifstream passFileR(passFile);
+	std::string linePass;
+	std::unordered_set<std::string> res;
+	while (passFileR >> linePass) {
+		res.insert(linePass);
+	}
+	do {
+		if (res.find(password) != res.end()) {
+			clrScr();
+			std::cout << shellName << ": Password correct\n" << std::endl;
+			break;
+		}
+		else {
+			std::cout << shellName << ": Password incorrect, quitting.." << std::endl;
+			exit(0);
+		}
+	} while(true);
 	std::cout << userName << " logged in at: " << dt << std::endl;
     std::cout << "Try typing 'help'!\n" << std::endl;
 	shellOutput();
@@ -71,8 +91,7 @@ void prinRes() {
 		exit(0);
 	}
     else if (response == "reset") {
-		const char* cfgUsrDel = configUsr.c_str();
-		std::remove(cfgUsrDel);
+		removeAll();
 		std::cout << shellName << ": Deleted saved configs, quitting." << std::endl;
 		exit(0);
 	}
@@ -133,14 +152,18 @@ void helpMsg() {
 }
 
 void nonUserShell() {
+	removeAll();
 	shellOutput();
 	std::getline(std::cin, response);
 	if (response == "setup") {
         std::cout << "New username: ";
 		std::getline(std::cin, userName);
+		std::cout << "New password: ";
+		std::getline(std::cin, password);
 		std::ofstream configUsrFile(configUsr);
 		configUsrFile << userName;
 		configUsrFile.close();
+		accPass();
 		isStarted = true;
 		std::cout << shellName << ": User created!, starting " << shellName << ".. " << std::endl;
 		sleep(3);
@@ -159,6 +182,20 @@ void nonUserShell() {
 
 void shellOutput() {
 	std::cout << userName << "@" << shellName << "> ";
+}
+
+void removeAll() {
+	const char* cfgPassDel = passFile.c_str();
+	const char* cfgUsrDel = configUsr.c_str();
+	std::ifstream configPassFileR(passFile);
+	std::ifstream configUsrFileR(configUsr);
+	if (configPassFileR) {
+		std::remove(cfgPassDel);
+	}
+	else if (configUsrFileR) {
+		std::remove(cfgUsrDel);
+	}
+	std::cout << "Wiping.." << std::endl;
 }
 
 void readUserName() {
