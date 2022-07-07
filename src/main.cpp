@@ -50,25 +50,7 @@ int main() {
 void startUp() {
     std::cout << appName << " 0.1.0-alpha" << std::endl;
 	passFailSafe();
-	std::cout << "Enter your password: ";
-	std::getline(std::cin, password);
-	std::ifstream passFileR(passFile);
-	std::string linePass;
-	std::unordered_set<std::string> res;
-	while (passFileR >> linePass) {
-		res.insert(linePass);
-	}
-	do {
-		if (res.find(password) != res.end()) {
-			clrScr();
-			std::cout << shellName << ": Password correct\n" << std::endl;
-			break;
-		}
-		else {
-			std::cout << shellName << ": Password incorrect, quitting.." << std::endl;
-			exit(0);
-		}
-	} while(true);
+	checkPass();
 	std::cout << userName << " logged in at: " << dt << std::endl;
     std::cout << "Try typing 'help'!\n" << std::endl;
 	shellOutput();
@@ -91,6 +73,7 @@ void prinRes() {
 		exit(0);
 	}
     else if (response == "reset") {
+		checkPass();
 		removeAll();
 		std::cout << shellName << ": Deleted saved configs, quitting." << std::endl;
 		exit(0);
@@ -195,7 +178,6 @@ void removeAll() {
 	if (configUsrFileR) {
 		std::remove(cfgUsrDel);
 	}
-	std::cout << "Wiping.." << std::endl;
 }
 
 void readUserName() {

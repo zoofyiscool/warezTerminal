@@ -26,3 +26,25 @@ void passFailSafe() {
 		exit(0);
 	}
 }
+
+void checkPass() {
+	std::cout << "Enter your password: ";
+	std::getline(std::cin, password);
+	std::ifstream passFileR(passFile);
+	std::string linePass;
+	std::unordered_set<std::string> res;
+	while (passFileR >> linePass) {
+		res.insert(linePass);
+	}
+	do {
+		if (res.find(password) != res.end()) {
+			clrScr();
+			std::cout << shellName << ": Password correct\n" << std::endl;
+			break;
+		}
+		else {
+			std::cout << shellName << ": Password incorrect, quitting.." << std::endl;
+			exit(0);
+		}
+	} while(true);
+}

@@ -4,16 +4,21 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <unordered_set>
 
+extern std::string shellName;
 extern std::string userName;
 extern std::string passFile;
 extern std::string envUsr;
 extern std::string homeDir;
 extern std::string appName;
 extern std::string password;
+
 void accPass();
 void passFailSafe();
+void clrScr();
 void nonUserShell();
 void removeAll();
+void checkPass();
 
 #endif
