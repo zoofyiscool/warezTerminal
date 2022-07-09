@@ -8,7 +8,7 @@ all:
 	if [[ ! -d "$(buildDir)" ]]; then \
 		mkdir $(buildDir); \
 	fi; \
-	$(CC) $(srcDir)/main.cpp $(srcDir)/password.cpp -o ${buildDir}/$(target)
+	$(CC) $(srcDir)/main.cpp $(srcDir)/password.cpp $(srcDir)/miniGames.cpp -o ${buildDir}/$(target)
 	@echo "Please run 'make install' as root to install"
 	@echo "Or run 'make test' to run"
 

@@ -4,7 +4,7 @@ A C++ project I'm working on
 Pre-compiled binary
 
 ```
-$ wget https://github.com/zoofyiscool/warezTerminal/releases/download/v0.1.0-alpha/warezTerminal
+$ wget https://github.com/zoofyiscool/warezTerminal/releases/download/v0.2.0-alpha/warezTerminal
 
 Just to be sure run
 
