@@ -1,6 +1,10 @@
 # warezTerminal
 A C++ project I'm working on
 
+very sorry that I used tabs instead of 4 spaces, this means that indents will look really strange if not viewing code with vim..
+
+sorry, but not really. use vim!!!
+
 Pre-compiled binary
 
 ```
