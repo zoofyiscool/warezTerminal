@@ -39,12 +39,12 @@ void checkPass() {
 	do {
 		if (res.find(password) != res.end()) {
 			clrScr();
-			std::cout << shellName << ": Password correct\n" << std::endl;
+			std::cout << shellName << ": Password correct" << std::endl;
 			break;
 		}
 		else {
-			std::cout << shellName << ": Password incorrect, quitting.." << std::endl;
-			exit(0);
+			std::cout << shellName << ": Password incorrect" << std::endl;
+			checkPass();
 		}
 	} while(true);
 }

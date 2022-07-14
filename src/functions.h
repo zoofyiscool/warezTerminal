@@ -25,5 +25,6 @@ void removeAll();
 void checkPass();
 void disneyMinigame();
 void showShellOutput(std::string msg);
+void discordMinigame();
 
 #endif

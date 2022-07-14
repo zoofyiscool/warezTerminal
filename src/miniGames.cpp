@@ -12,7 +12,7 @@ void disneyMinigame() {
     }
     std::cout << shellName << ": Amount of movies and TV shows to delete: " << ranSteal << std::endl;
     std::cout << shellName << ": Estimated wait time: " << ranStealTime << std::endl;
-    std::cout << shellName << ": Estimated files to be deleted each " << ranStealTime << " second(s): " << ranStealAmt << std::endl;    std::cout << "Continue? enter for yes [y/n]: ";
+    std::cout << shellName << ": Estimated files to be deleted each " << ranStealTime << " second(s): " << ranStealAmt << std::endl;    	std::cout << "Continue? enter for yes [y/n]: ";
     std::string confirmPwnDis;
     std::getline(std::cin, confirmPwnDis);
     if (confirmPwnDis == "y" || confirmPwnDis == "") {
@@ -29,4 +29,36 @@ void disneyMinigame() {
    		showShellOutput("Maybe another time then.\n");
         main();
 	}
+}
+
+void discordMinigame() {
+	int getCaught;
+	srand(time(0));
+	getCaught = 4;
+	//getCaught = (rand() % 5 + 1);
+	std::cout << "Spoof username: ";
+	std::string spoofUser;
+	std::getline(std::cin, spoofUser);
+	if (spoofUser == userName) {
+		showShellOutput("Your spoof username cannot be the same as your normal one!");
+		discordMinigame();
+	}
+	std::cout << "Spoof username set: " << spoofUser << std::endl;
+	if (getCaught == 4) {
+		for (int i = 0; i <= 3; i+=1) {
+			clrScr();
+			std::cout << "Discord system logs: " << spoofUser << ": gathering user info.. " << i << "/20" << std::endl;
+			sleep(1);
+		}
+		showShellOutput("Your real username and location has been revealed!");
+		std::cout << "Discord system logs: Intruder found, information: " << userName << " location: Brazil" << std::endl;
+	   	main();	
+	}
+	for (int i = 0; i <= 20; i+=1) {
+		clrScr();
+		std::cout << getCaught << std::endl;
+		std::cout << "Discord system logs: " << spoofUser << ": gathering user info.. " << i << "/20" << std::endl;
+		sleep(1);
+	}
+	main();
 }

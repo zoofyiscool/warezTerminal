@@ -150,6 +150,9 @@ void prinRes() {
 		verMsg();
 		main();
 	}
+	else if (response == "testmini") {
+		discordMinigame();
+	}
 	else {
         std::cout << shellName << ": command not found: " << response << std::endl;;
         main();
