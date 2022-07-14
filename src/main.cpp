@@ -23,6 +23,8 @@ std::string appVersion = "0.1.1-alpha";
 bool isStarted = false;
 //bool isNobody = false;
 bool isNotNobody = true;
+bool nobodyPest = false;
+bool isNobody = false;
 bool wasNobody = false; /* incase they try again.. */
 bool nobodyAllowed = false; /* alright... */
 time_t now = time(0);
@@ -49,6 +51,12 @@ int main() {
 		nonUserShell();
 	}
 	else if (isStarted == true) {
+		if (isNobody == true) {
+			if (nobodyPest == true) {
+				std::cout << "Try running the 'whoami' command! :)" << std::endl;
+				nobodyPest = false;
+			}
+		}
 		shellOutput();
 		std::getline(std::cin, response);
 		prinRes();
@@ -59,8 +67,8 @@ int main() {
 void startUp() {
 	std::ifstream nobodyForever(nobodyDir);
 	if (nobodyForever) {
-		std::cout << "why though" << std::endl;
-//		isNobody = true;
+		isNobody = true;
+		nobodyPest = true;
 		passFailSafe();
 		checkPass();
 	   	main();	
@@ -68,7 +76,7 @@ void startUp() {
 	else {
 		if (userName == "nobody") { /* thought this would be funny lol */
 			if (wasNobody == true) {
-				std::cout << "no fucking way u done it again lol.." << std::endl;
+				std::cout << "no way u done it again lol.." << std::endl;
 				std::cout << "mAyBe TrY aGaIn?!" << std::endl;
 				nobodyAllowed = true;
 				wasNobody = false;
@@ -76,11 +84,12 @@ void startUp() {
 			}
 			if (nobodyAllowed == true) {
 				std::cout << "fine, youve beaten me.. you can have it." << std::endl;
-				std::cout << "you will have this forever." << std::endl;
+				std::cout << "you will have this forever. open application again and login.." << std::endl;
 				std::ofstream nobodyForever(nobodyDir);
 				nobodyForever << "why would you do this, i thought i was nobody, not you!!";
 				nobodyForever.close();
 				nobodyAllowed = false;
+				exit(0);
 			}
 			if (isNotNobody == true) {
 				wasNobody = true;
@@ -137,7 +146,7 @@ void prinRes() {
 		if (userName == "nobody") {
 			showMessage("You will never be nobody, you made a mistake typing this command :))");
 			userName = "NEVER";
-			std::cout << "ur fucked loll.." << std::endl;
+			std::cout << "ur screwed loll.." << std::endl;
 			removeAll();
 			main();
 		}
@@ -150,7 +159,8 @@ void prinRes() {
 		verMsg();
 		main();
 	}
-	else if (response == "testmini") {
+	else if (response == "discordmini") {
+		showMessage("This minigame is still in development. Lacking features.");
 		discordMinigame();
 	}
 	else {

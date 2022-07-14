@@ -12,7 +12,7 @@ void disneyMinigame() {
     }
     std::cout << shellName << ": Amount of movies and TV shows to delete: " << ranSteal << std::endl;
     std::cout << shellName << ": Estimated wait time: " << ranStealTime << std::endl;
-    std::cout << shellName << ": Estimated files to be deleted each " << ranStealTime << " second(s): " << ranStealAmt << std::endl;    	std::cout << "Continue? enter for yes [y/n]: ";
+    std::cout << shellName << ": Estimated files to be deleted each " << ranStealTime << " second(s): " << ranStealAmt << std::endl;		std::cout << "Continue? enter for yes [y/n]: ";
     std::string confirmPwnDis;
     std::getline(std::cin, confirmPwnDis);
     if (confirmPwnDis == "y" || confirmPwnDis == "") {
@@ -34,8 +34,7 @@ void disneyMinigame() {
 void discordMinigame() {
 	int getCaught;
 	srand(time(0));
-	getCaught = 4;
-	//getCaught = (rand() % 5 + 1);
+	getCaught = (rand() % 5 + 1);
 	std::cout << "Spoof username: ";
 	std::string spoofUser;
 	std::getline(std::cin, spoofUser);
@@ -44,20 +43,21 @@ void discordMinigame() {
 		discordMinigame();
 	}
 	std::cout << "Spoof username set: " << spoofUser << std::endl;
-	if (getCaught == 4) {
+	if (getCaught == 3) {
 		for (int i = 0; i <= 3; i+=1) {
 			clrScr();
-			std::cout << "Discord system logs: " << spoofUser << ": gathering user info.. " << i << "/20" << std::endl;
+			std::cout << "Discord system logs: " << spoofUser << " is gathering user info.. " << i << "/20" << std::endl;
 			sleep(1);
 		}
 		showShellOutput("Your real username and location has been revealed!");
-		std::cout << "Discord system logs: Intruder found, information: " << userName << " location: Brazil" << std::endl;
+		/* will add randomness to location prolly */
+		std::cout << "Discord system logs: Intruder found, username: " << userName << " location: Brazil" << std::endl;
+		/* will add more to this */
 	   	main();	
 	}
 	for (int i = 0; i <= 20; i+=1) {
 		clrScr();
-		std::cout << getCaught << std::endl;
-		std::cout << "Discord system logs: " << spoofUser << ": gathering user info.. " << i << "/20" << std::endl;
+		std::cout << "Discord system logs: " << spoofUser << " is gathering user info.. " << i << "/20" << std::endl;
 		sleep(1);
 	}
 	main();
